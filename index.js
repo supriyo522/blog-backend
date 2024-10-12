@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const geoip = require('geoip-lite');
-const Razorpay = require('razorpay');
+// const Razorpay = require('razorpay');
 
 dotenv.config();
 const app = express();
@@ -15,10 +15,10 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .catch(err => console.error(err));
 
 // Razorpay instance
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET
-});
+// const razorpay = new Razorpay({
+//   key_id: process.env.RAZORPAY_KEY_ID,
+//   key_secret: process.env.RAZORPAY_KEY_SECRET
+// });
 
 // Middleware to detect user location from IP
 app.use((req, res, next) => {
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/blogs', require('./routes/blogRoutes'));
-app.use('/api/payment', require('./routes/paymentRoutes')(razorpay));
+// app.use('/api/payment', require('./routes/paymentRoutes')(razorpay));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
